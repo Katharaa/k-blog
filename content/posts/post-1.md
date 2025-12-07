@@ -1,7 +1,6 @@
 ---
 title: "My Journey Through the LFX Linux Kernel Mentorship Program"
 date: 2025-12-06
-draft: false
 ShowToc: true
 slug: 
 category: blog 
@@ -13,7 +12,6 @@ cover:
   caption: 
   relative: true
 showtoc: true
-draft: false
 --- 
 My Journey Through the LFX Linux Kernel Mentorship Program
 ==========================================================

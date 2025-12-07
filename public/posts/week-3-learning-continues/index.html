@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Learning Continues - Kathara</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Hey, friends! I&rsquo;m back with a super interesting topic today. We&rsquo;re diving into the world of Debian packages. Now, I know it might sound a bit techy, but stick with me – I&rsquo;ll keep it simple and fun.
+So what is a debian package? Imagine it as a neatly wrapped gift – in this case, a &ldquo;.deb&rdquo; file. This file is a curated collection containing everything a piece of software needs to run smoothly on your Debian-based system." />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/week-3-learning-continues/">
+  <meta property="og:site_name" content="Kathara">
+  <meta property="og:title" content="Learning Continues">
+  <meta property="og:description" content="Hey, friends! I’m back with a super interesting topic today. We’re diving into the world of Debian packages. Now, I know it might sound a bit techy, but stick with me – I’ll keep it simple and fun.
+So what is a debian package? Imagine it as a neatly wrapped gift – in this case, a “.deb” file. This file is a curated collection containing everything a piece of software needs to run smoothly on your Debian-based system.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Learning Continues">
+  <meta name="twitter:description" content="Hey, friends! I’m back with a super interesting topic today. We’re diving into the world of Debian packages. Now, I know it might sound a bit techy, but stick with me – I’ll keep it simple and fun.
+So what is a debian package? Imagine it as a neatly wrapped gift – in this case, a “.deb” file. This file is a curated collection containing everything a piece of software needs to run smoothly on your Debian-based system.">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.7a5c05040394322612a2d98397e9932aa81d9d7acc70199463e79f8180c8e0c0.css" /><script type="text/javascript"
+		src="http://localhost:1313/js/MathJax.js"></script>
+		
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script><link rel="stylesheet" href="http://localhost:1313/katex/katex.min.css ">
+		<script defer src="http://localhost:1313/katex/katex.min.js"></script>
+		<script defer src="http://localhost:1313/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+		</script>
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Kathara</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Learning Continues</h1>
+          <div class="meta">Posted on Jan 1, 2024</div>
+        </div>
+        
+        <section class="body">
+          <p>Hey, friends! I&rsquo;m back with a super interesting topic today. We&rsquo;re diving into the world of Debian packages. Now, I know it might sound a bit techy, but stick with me – I&rsquo;ll keep it simple and fun.</p>
+<p>So what is a debian package? Imagine it as a neatly wrapped gift – in this case, a &ldquo;<code>.deb</code>&rdquo; file. This file is a curated collection containing everything a piece of software needs to run smoothly on your Debian-based system.</p>
+<p>It is an archive file that contains all the necessary files and metadata required to install and manage a piece of software on a Debian-based system. It includes the application&rsquo;s binaries, libraries, configuration files, and other resources. These packages are created and maintained by the Debian project and its community of developers.</p>
+<p>The importance of Debian packages lies in their ability to simplify software installation and management. They provide a standardized and efficient way to distribute software, ensuring that dependencies are properly resolved and conflicts are avoided. Debian packages facilitate easy installation, updates, and removal of software, making it convenient for users to maintain a stable and up-to-date system.</p>
+<h2 id="structure-of-a-deb-file">Structure of a deb file</h2>
+<p>A Debian package has a specific structure that consists of various components. Now, imagine the package as a box. Inside this box, there are 3 main sub-boxes:</p>
+<ul>
+<li><strong>Debian-binary:</strong> When you open a &ldquo;.deb&rdquo; file, the first thing you encounter is a file called debian-binary. It&rsquo;s like the cover of a book, and it quietly tells you its version &ldquo;2.0.&rdquo;</li>
+<li><strong>Control Archive:</strong> The Control.tar box holds a file named &ldquo;control&rdquo; that spills the details about the package – its name, version, and other important details. It&rsquo;s like the instruction manual for the software.
+<ul>
+<li>Think of &ldquo;md5sums&rdquo; as the guard. It checks if everything inside is genuine and not corrupted.</li>
+<li>&ldquo;Conffiles&rdquo; lists the files of the package that should be treated as configuration files.</li>
+<li>&ldquo;Preinst&rdquo; and &ldquo;postinst&rdquo; scripts are executed before and after installation.</li>
+<li>&ldquo;Prerm&rdquo; and &ldquo;postrm&rdquo; are executed while removing the package.</li>
+<li>&ldquo;Config&rdquo; assists debconf in configuring software during installation by asking user-specific questions.</li>
+<li>It allows post-install tweaks, ensuring your software aligns perfectly with your preferences and &ldquo;shlibs&rdquo; a list of shared library dependencies.</li>
+</ul>
+</li>
+<li><strong>Data Archive:</strong> Now, inside our box, there&rsquo;s a folder called &ldquo;data.tar.&rdquo; In &ldquo;usr,&rdquo; you find the actual software, like the heart of the package.
+<ul>
+<li>
+<p>&ldquo;Bin&rdquo; holds the executable – the actual program you run.</p>
+</li>
+<li>
+<p>&ldquo;Share&rdquo; is like the library, with a README giving you guidance, like a map for the software.</p>
+<pre><code>my-app_1.0-1_amd64.deb
+|
+|-- debian-binary
+|-- control.tar
+|   |-- control
+|   |-- md5sums
+|   |-- conffiles
+|   |-- preinst
+|   |-- postinst
+|   |-- prerm
+|   |-- postrm
+|   |-- config
+|   +-- shlibs
++-- data.tar
+    |-- usr/
+    |   |-- bin/
+    |   |   +-- my-app
+    |   +-- share/
+    |       +-- doc/
+    |           +-- my-app/
+    |               +-- README
+    +-- etc/
+        +-- my-app.conf
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-to-install-a-debian-package">How to Install a Debian Package:</h2>
+<p>Installing a Debian package is a straightforward process. You can install a <code>.deb</code> file using the <code>dpkg</code> command. Here&rsquo;s a step-by-step guide:</p>
+<pre><code>        Open your terminal and navigate to the directory where the .deb file is located.
+
+        Run the following command to install the package:
+        apt install package_name.deb.
+        Replace package_name.deb with the actual name of the .deb file you want to install.
+
+        And there you have it! The .deb file is now installed on your system.
+</code></pre>
+<h2 id="creating-your-moinmoin-instance">Creating Your MoinMoin Instance:</h2>
+<p>We need an instance directory for each wiki site we wish to run using MoinMoin. Here&rsquo;s a step-by-step guide:</p>
+<h3 id="step-1">Step 1:</h3>
+<p>Use the magic command to create a new instance directory. It&rsquo;s like preparing a canvas for your masterpiece:</p>
+<pre><code>        moin create-instance --path INSTANCE-DIRECTORY
+</code></pre>
+<h3 id="step-2">Step 2:</h3>
+<p>Enter the newly created instance directory, where you&rsquo;ll find a magical file named wikiconfig.py. Open it with your favorite text editor – this is where the enchantment begins. Customize settings like:</p>
+<pre><code>        sitename: The name of your wiki realm.
+        interwikiname: A unique name to identify your wiki in the interweb.
+        acls: Access control lists – setting who can do what in your wiki.
+        SECRET_KEY: A secret ingredient for security.
+</code></pre>
+<h3 id="step-3">Step 3:</h3>
+<p>After configuring, you can create an empty wiki by initializing the storage and the index:</p>
+<pre><code>        moin index-create
+
+        If you want some sample content to play with:
+
+        moin load-sample # (deprecated)
+        moin index-build
+
+        Or, if you have a Moin 1.9.x wiki, let's transition it to the Moin 2 era:
+        moin import19 -d &lt;path to 1.9 wiki/data&gt;
+</code></pre>
+<h3 id="step-4">Step 4:</h3>
+<p>For a touch of language diversity, load English help for editors (replace en with your preferred de):</p>
+<pre><code>        moin load-help -n en
+        moin load-help -n common
+</code></pre>
+<h3 id="step-5">Step 5:</h3>
+<p>With your instance all set up, it&rsquo;s time to launch your wiki into the digital cosmos:</p>
+<pre><code>        moin run
+</code></pre>
+<p>Visit the URL it shows in the log output, and there you have it – your very own MoinMoin wiki instance!</p>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/Katharaa" rel="me" title="GitHub"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+    </svg></a><a class="border"></a><a class="soc" href="https://salsa.debian.org/kathara" rel="me" title="GitLab"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#gitlab" />
+    </svg></a><a class="border"></a><a class="soc" href="https://www.linkedin.com/in/kathara-/" rel="me" title="Linkedin"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+    </svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

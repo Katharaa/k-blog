@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Patch management with quilt :) - Kathara</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="In Debian packaging, a patch refers to a file containing changes to a source file or directory.
+They help you fix bugs, add features, or make other changes without affecting the original code directly.
+Quilt is a tool used to manage these patches efficiently.Patches are like small updates to your code.
+Common Terms :
+
+
+Export QUILT_PATCHES: This command sets the environment variable QUILT_PATCHES to specify the directory containing patches. For example: export QUILT_PATCHES=debian/patches." />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/patch_management_with_quilt/">
+  <meta property="og:site_name" content="Kathara">
+  <meta property="og:title" content="Patch management with quilt :)">
+  <meta property="og:description" content="In Debian packaging, a patch refers to a file containing changes to a source file or directory. They help you fix bugs, add features, or make other changes without affecting the original code directly. Quilt is a tool used to manage these patches efficiently.Patches are like small updates to your code.
+Common Terms : Export QUILT_PATCHES: This command sets the environment variable QUILT_PATCHES to specify the directory containing patches. For example: export QUILT_PATCHES=debian/patches.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-08T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Patch management with quilt :)">
+  <meta name="twitter:description" content="In Debian packaging, a patch refers to a file containing changes to a source file or directory. They help you fix bugs, add features, or make other changes without affecting the original code directly. Quilt is a tool used to manage these patches efficiently.Patches are like small updates to your code.
+Common Terms : Export QUILT_PATCHES: This command sets the environment variable QUILT_PATCHES to specify the directory containing patches. For example: export QUILT_PATCHES=debian/patches.">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.7a5c05040394322612a2d98397e9932aa81d9d7acc70199463e79f8180c8e0c0.css" /><script type="text/javascript"
+		src="http://localhost:1313/js/MathJax.js"></script>
+		
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script><link rel="stylesheet" href="http://localhost:1313/katex/katex.min.css ">
+		<script defer src="http://localhost:1313/katex/katex.min.js"></script>
+		<script defer src="http://localhost:1313/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+		</script>
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Kathara</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Patch management with quilt :)</h1>
+          <div class="meta">Posted on Mar 8, 2024</div>
+        </div>
+        
+        <section class="body">
+          <p>In Debian packaging, a patch refers to a file containing changes to a source file or directory.
+<strong>They help you fix bugs, add features, or make other changes without affecting the original code directly.</strong>
+Quilt is a tool used to manage these patches efficiently.Patches are like small updates to your code.</p>
+<h2 id="common-terms-">Common Terms :</h2>
+<ul>
+<li>
+<p><strong>Export QUILT_PATCHES:</strong> This command sets the environment variable QUILT_PATCHES to specify the directory containing patches. For example: <code>export QUILT_PATCHES=debian/patches</code>.</p>
+</li>
+<li>
+<p><strong>Quilt Push:</strong> Applies patches to the source files. The <code>-a</code> flag applies all patches. Usage: <code>quilt push -a</code>.</p>
+</li>
+<li>
+<p><strong>Quilt New:</strong> Creates a new patch. Use this command when manual patching is required. Usage: <code>quilt new &lt;patch_name&gt;</code>.</p>
+</li>
+<li>
+<p><strong>Adding a File:</strong> To add a file to a patch, use the <code>quilt add</code> command. For example: <code>quilt add README</code> (where &lsquo;README&rsquo; is the name of the file you want to modify).</p>
+</li>
+<li>
+<p><strong>Quilt Refresh:</strong> Updates a patch with changes made to its files. This command can be executed as often as needed. Usage: <code>quilt refresh</code>.</p>
+</li>
+<li>
+<p><strong>Quilt Header:</strong> Edits the header of a patch. You can use this command to add descriptions or update the metadata of the patch. For example: <code>quilt header -e --dep3</code>.</p>
+</li>
+<li>
+<p><strong>Quilt Pop:</strong> Removes all patches from the stack and returns the source to its original state. Usage: <code>quilt pop -a</code>.</p>
+</li>
+<li>
+<p><strong>.pc/ Directory:</strong> This directory, hidden from plain sight, stores vital information about each patch, including its name, description, and application status. It acts like a behind-the-scenes organizer for Quilt&rsquo;s patching operations.</p>
+</li>
+<li>
+<p><strong>Series File:</strong> This file acts as the roadmap for applying patches. It contains a simple list of patch names, indicating the exact order in which Quilt should apply them. Imagine it as a recipe for Quilt, guiding it through the patching process step-by-step.</p>
+</li>
+</ul>
+<h2 id="tutorial-">Tutorial :</h2>
+<h3 id="exporting-quilt">Exporting Quilt</h3>
+<p>To begin, export the <code>QUILT_PATCHES</code> environment variable to specify the directory containing patches:</p>
+<pre><code>export QUILT_PATCHES=debian/patches
+</code></pre>
+<h3 id="applying-patches">Applying Patches</h3>
+<p>Apply patches using the <code>quilt push -a</code> command:</p>
+<pre><code>quilt push -a
+</code></pre>
+<p>If any patch fails with an offset, follow the manual patching process.</p>
+<h4 id="manual-patching-process-">Manual Patching Process :</h4>
+<p>If a patch fails with an offset, you&rsquo;ll need to apply it manually. For example:</p>
+<pre><code>    Applying patch 008-setup-xstatic
+    patching file setup.py
+    Hunk #1 FAILED at 90.
+    1 out of 1 hunk FAILED -- rejects in file setup.py
+    Patch 008-setup-xstatic does not apply (enforce with -f)
+</code></pre>
+<p>If you encounter an error like the one above, manual patching is required. Follow these steps:</p>
+<ol>
+<li>Delete the failed patch from the patches directory and the series file</li>
+<li>Create a new patch with <code>quilt new</code> and manually apply changes to the file</li>
+<li>Add the file to the patch with <code>quilt add</code></li>
+<li>Edit the file using <code>quilt edit</code></li>
+<li>Refresh the patch with <code>quilt refresh</code></li>
+</ol>
+<h4 id="handling-patches-with-offsets-">Handling Patches with Offsets :</h4>
+<p>If a patch fails with an offset, For example:</p>
+<pre><code>    Applying patch 010-setup-contrib-intermap
+    patching file setup.py
+    Hunk #1 succeeded at 63 (offset 1 line).
+
+    Applying patch 011-setup-package-data
+    patching file setup.py
+    Hunk #3 succeeded at 67 (offset 1 line).
+</code></pre>
+<p>Follow these steps:</p>
+<ol>
+<li>If a patch fails with an offset, use <code>quilt pop -a</code> to revert changes</li>
+<li>Push the failed patch individually using <code>quilt push &lt;patch_name&gt;</code></li>
+<li>Refresh the patch with <code>quilt refresh</code></li>
+<li>Do <code>quilt push -a</code> to apply all the patches again</li>
+<li>Repeat the process until all patches are successfully applied</li>
+</ol>
+<h3 id="before-committing-">Before Committing :</h3>
+<p>Before committing changes, ensure all patches are popped. <em>(Also Remember not to commit this directory to version control as it contains temporary and metadata files specific to the patch management process.)</em></p>
+<pre><code>quilt pop -a
+git add debian/patches/
+git commit -m &quot;Applied patches using Quilt&quot;
+</code></pre>
+<hr>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/Katharaa" rel="me" title="GitHub"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+    </svg></a><a class="border"></a><a class="soc" href="https://salsa.debian.org/kathara" rel="me" title="GitLab"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#gitlab" />
+    </svg></a><a class="border"></a><a class="soc" href="https://www.linkedin.com/in/kathara-/" rel="me" title="Linkedin"><svg class="feather">
+       <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+    </svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>
