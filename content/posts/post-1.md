@@ -2,7 +2,7 @@
 title: "My Journey Through the LFX Linux Kernel Mentorship Program"
 date: 2025-12-06
 ShowToc: true
-slug: 
+slug: "lfx-linux-kernel-mentorship-program-experience"
 category: blog 
 summary:
 description: 
